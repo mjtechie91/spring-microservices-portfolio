@@ -5,6 +5,8 @@ services:
     image: postgres:latest
     container_name: patient-service-db
     restart: always
+    networks:
+      - mahi
     environment:
       POSTGRES_DB: patientdb
       POSTGRES_USER: patientuser
@@ -14,3 +16,6 @@ services:
       - "5432:5432"
     volumes:
       - ./pgdata:/var/lib/postgresql/data   # Host directory sync
+networks:
+  mahi:
+    external: true

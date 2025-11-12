@@ -5,12 +5,19 @@ services:
     build: .
     container_name: patient-service
     restart: on-failure
+    networks:
+      - mahi
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://patient-service-db:5432/patientdb
       SPRING_DATASOURCE_USERNAME: patientuser
       SPRING_DATASOURCE_PASSWORD: patientpass
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
       SPRING_SQL_INIT_MODE: always
+      BILLING_SERVICE_ADDRESS: billing-service
+      BILLING_SERVICE_GRPC_PORT: 9001
       SERVER_PORT: 4000
     ports:
       - "4000:4000"
+networks:
+  mahi:
+    external: true
