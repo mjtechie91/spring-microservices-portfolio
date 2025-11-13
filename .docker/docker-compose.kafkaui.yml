@@ -1,0 +1,19 @@
+version: "3.9"
+
+services:
+  kafdrop:
+    image: obsidiandynamics/kafdrop:latest
+    container_name: kafdrop
+    environment:
+      KAFKA_BROKERCONNECT: kafka:9092
+      JVM_OPTS: "-Xms32M -Xmx64M"
+    ports:
+      - "9000:9000"
+    depends_on:
+      - kafka
+    networks:
+      - mahi
+
+networks:
+  mahi:
+    external: true
